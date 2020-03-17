@@ -1,0 +1,436 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+   
+   
+   <title>جمعية الاورمان الخيرية | بوابتك للخير</title>
+    <meta name="description" content="جمعية الاورمان الخيرية | بوابتك للخير"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+      <script src="/js/libs/jquery-1.10.2.min.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/general.css" runat="server">
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Semantic HTML5 Support on old IE -->
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Add jQuery library -->
+	
+
+	<!-- Add mousewheel plugin (this is optional) -->
+      <script type="text/javascript" src="/lib/jquery-1.7.2.min.js"></script>
+
+    	<script type="text/javascript" src="/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="/source/jquery.fancybox.js?v=2.0.6"></script>
+	<link rel="stylesheet" type="text/css" href="/source/jquery.fancybox.css?v=2.0.6" media="screen" />
+
+	<!-- Add Button helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="/source/helpers/jquery.fancybox-buttons.css?v=1.0.2" />
+	<script type="text/javascript" src="/source/helpers/jquery.fancybox-buttons.js?v=1.0.2"></script>
+
+	<!-- Add Thumbnail helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="/source/helpers/jquery.fancybox-thumbs.css?v=1.0.2" />
+	<script type="text/javascript" src="/source/helpers/jquery.fancybox-thumbs.js?v=1.0.2"></script>
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="/source/helpers/jquery.fancybox-media.js?v=1.0.0"></script>
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        /*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+	        $('.fancybox').fancybox();
+
+	        /*
+			 *  Different effects
+			 */
+
+	        // Change title type, overlay opening speed and opacity
+	        $(".fancybox-effects-a").fancybox({
+	            helpers: {
+	                title: {
+	                    type: 'outside'
+	                },
+	                overlay: {
+	                    speedIn: 500,
+	                    opacity: 0.95
+	                }
+	            }
+	        });
+
+	        // Disable opening and closing animations, change title type
+	        $(".fancybox-effects-b").fancybox({
+	            openEffect: 'none',
+	            closeEffect: 'none',
+
+	            helpers: {
+	                title: {
+	                    type: 'over'
+	                }
+	            }
+	        });
+
+	        // Set custom style, close if clicked, change title type and overlay color
+	        $(".fancybox-effects-c").fancybox({
+	            wrapCSS: 'fancybox-custom',
+	            closeClick: true,
+
+	            helpers: {
+	                title: {
+	                    type: 'inside'
+	                },
+	                overlay: {
+	                    css: {
+	                        'background-color': '#eee'
+	                    }
+	                }
+	            }
+	        });
+
+	        // Remove padding, set opening and closing animations, close if clicked and disable overlay
+	        $(".fancybox-effects-d").fancybox({
+	            padding: 0,
+
+	            openEffect: 'elastic',
+	            openSpeed: 150,
+
+	            closeEffect: 'elastic',
+	            closeSpeed: 150,
+
+	            closeClick: true,
+
+	            helpers: {
+	                overlay: null
+	            }
+	        });
+
+	        /*
+			 *  Button helper. Disable animations, hide close button, change title type and content
+			 */
+
+	        $('.fancybox-buttons').fancybox({
+	            openEffect: 'none',
+	            closeEffect: 'none',
+
+	            prevEffect: 'none',
+	            nextEffect: 'none',
+
+	            closeBtn: false,
+
+	            helpers: {
+	                title: {
+	                    type: 'inside'
+	                },
+	                buttons: {}
+	            },
+
+	            afterLoad: function () {
+	                this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+	            }
+	        });
+
+
+	        /*
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+			 */
+
+	        $('.fancybox-thumbs').fancybox({
+	            prevEffect: 'none',
+	            nextEffect: 'none',
+
+	            closeBtn: false,
+	            arrows: false,
+	            nextClick: true,
+
+	            helpers: {
+	                thumbs: {
+	                    width: 50,
+	                    height: 50
+	                }
+	            }
+	        });
+
+	        /*
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+			*/
+	        $('.fancybox-media')
+				.attr('rel', 'media-gallery')
+				.fancybox({
+				    openEffect: 'none',
+				    closeEffect: 'none',
+				    prevEffect: 'none',
+				    nextEffect: 'none',
+
+				    arrows: false,
+				    helpers: {
+				        media: {},
+				        buttons: {}
+				    }
+				});
+
+	        /*
+			 *  Open manually
+			 */
+
+	        $("#fancybox-manual-a").click(function () {
+	            $.fancybox.open('1_b.jpg');
+	        });
+
+	        $("#fancybox-manual-b").click(function () {
+	            $.fancybox.open({
+	                href: 'iframe.html',
+	                type: 'iframe',
+	                padding: 5
+	            });
+	        });
+
+	        $("#fancybox-manual-c").click(function () {
+	            $.fancybox.open([
+					{
+					    href: '1_b.jpg',
+					    title: 'My title'
+					}, {
+					    href: '2_b.jpg',
+					    title: '2nd title'
+					}, {
+					    href: '3_b.jpg'
+					}
+	            ], {
+	                helpers: {
+	                    thumbs: {
+	                        width: 75,
+	                        height: 50
+	                    }
+	                }
+	            });
+	        });
+
+
+	    });
+	</script>
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+	</style>
+     <link rel="icon" type="image/png" href="/css/images/logo-small.png" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form runat="server">
+
+
+                  <%--  <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Hello, <a runat="server" class="username" href="~/Account/Manage.aspx" title="Manage your account">
+                                    <asp:LoginName runat="server" CssClass="username" />
+                                </a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>--%>
+             
+   
+     
+
+
+
+        
+ <!-- Header Top -->
+    <header class="top cf">
+        <div class="">
+           
+
+            <div class="right"> 
+               
+                 <div class="block donate">
+                    <a href="/Job">وظائف</a>
+                </div>
+
+               <div class="block email">
+                    <a href="/Complain">صندوق الشكاوى</a>
+                </div>
+                 <div class="block email" style="background:none">
+                    <a href="/BankAccounts" style="background:none;padding:0">حسابات البنوك</a>
+                </div>
+                <div class="block donate">
+                    <a href="/aaibusd/">للتبرع أون لاين اضغط هنا</a>
+                </div>
+                <div class="block email" style="background:none">
+               <a href="/About" style="background:none;padding:0">    عن المؤسسة</a>
+                </div>
+                <div class="block search">
+                    <div class="">
+                         
+                      <a href="https://www.youtube.com/channel/UCnNWucvVoxWq8kJxrSV5fvQ" title="تابعنا على اليوتيوب" target="_blank" class="YouTube"></a>
+                        <a href="https://twitter.com/al_orman" title="تابعنا على  تويتر" target="_blank" class="twitter"></a>
+                          <a href="https://www.facebook.com/OrmanCharityAssociation" title="شاهد صفحتنا على الفيس بوك" target="_blank" class="facebook"></a>
+                          
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Header Main -->
+    <header class="main">
+        <div class="center">
+            <div class="logo"><a href="/home">
+    <img src="~/css/images/logo.png" runat="server" width="210" alt="Alternate Text" />
+                              </a></div>
+
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li><a href="/home" id="m0">الرئيسية</a></li>
+                    <li>
+                        <a href="/Projects" id="m1">أنشطة الجمعية</a>
+                        <ul>
+                            <li><a href="/Projects">المساعدات الإنسانية</a></li>
+                            <li><a href="/PoorFamilies">مشروعات الجمعية</a></li>
+                           <%-- <li><a href="/Education">الجانب التعليمى</a></li>--%>
+                            <li><a href="/Health">الأنشطة الطبية</a></li>
+                            <li><a href="/Activity">الأنشطة الموسمية</a></li>
+                            <li><a href="/OrphanDay" title="">رعاية الايتام</a></li>
+                        </ul>
+                    </li>
+                  <%--  <li><a href="#" id="m2">الأيتام</a>
+                         <ul>
+                          <li><a href="/OrphanDay" title="">يوم اليتيم</a></li>
+						<li><a href="/MarriageOrphans" title="">تزويج اليتيمات</a></li>
+						<li><a href="/Orphanages" title="">دور الأيتام</a></li>
+                           
+                        </ul>
+                    </li>--%>
+                     <li><a href="/Branches" id="m3">فروعنا</a></li>
+                    <li><a href="#" id="m4">أخبارنا</a>
+                        <ul>
+                          <li><a href="/OnlineNews" title="">أخبار أون لاين</a></li>
+						<li><a href="/News" title="">أخبار الجرائد والمجلات</a></li>
+						
+                           
+                        </ul>
+                    </li>
+                    <li><a href="/Gallery" id="m5">ألبوم الصور</a></li>
+                    <li><a href="https://www.youtube.com/channel/UCnNWucvVoxWq8kJxrSV5fvQ" id="m6" target="_blank">الفيديو</a></li>
+                    <li><a href="/FAQ" id="m7">أسئلة شائعة</a></li>
+                </ul>
+            </nav>
+
+            <div id="mobile-button"></div>
+            <div id="mobile-menu">
+                <ul>
+                    <li><a href="/home/">الرئيسية</a></li>
+                    
+                     <li>
+                        <a href="#">أنشطة الجمعية</a>
+                        <ul>
+                            <li><a href="/Projects/">المشروعات التنموية</a></li>
+                            <li><a href="/PoorFamilies/">كفالة الأسر الفقيرة</a></li>
+                            <li><a href="/Education/">الجانب التعليمى</a></li>
+                            <li><a href="/Health/">الرعاية الصحية</a></li>
+                            <li><a href="/Activity/">الأنشطة الموسمية</a></li>
+                           
+                        </ul>
+                    </li>
+                   <li><a href="#">الأيتام</a>
+                         <ul>
+                          <li><a href="/OrphanDay" title="">يوم اليتيم</a></li>
+						<li><a href="/MarriageOrphans" title="">تزويج اليتيمات</a></li>
+						<li><a href="/Orphanages" title="">دور الأيتام</a></li>
+                           
+                        </ul>
+                    </li>
+                     <li><a href="/Branches">فروعنا</a></li>
+                     <li><a href="#" id="A1">أخبارنا</a>
+                        <ul>
+                          <li><a href="/OnlineNews" title="">أخبار أون لاين</a></li>
+						<li><a href="/News" title="">أخبار الجرائد والمجلات</a></li>
+						
+                           
+                        </ul>
+                    </li>
+                    <li><a href="/Gallery">ألبوم الصور</a></li>
+                    <li><a href="https://www.youtube.com/user/ormanassociation/videos">الفديو</a></li>
+                    <li><a href="/FAQ">أسئلة شائعة</a></li>
+                    <li><a href="/donate/" style="color:#fff">إتبرع أون لاين</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <script type="text/javascript">
+        $("a#" + menuGroup).addClass("active");
+        </script>
+
+     <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+      
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+      
+<br /><br />
+
+    <!-- Section Bottom -->
+  <footer>
+        <div class="line">
+            <div class="center cf">
+                <div class="links">
+                    <a href="/home">الرئيسية</a>
+                    <a href="/News">الاخبار الصحفية</a>
+                    <a href="/Volunteer">إستمارة التطوع</a>
+                    <a href="/BankAccounts">حسابات البنوك</a>
+                    <a href="/Compalin">صندوق الشكاوى</a>
+                   
+                    <a href="/Branches">إتصل بنا</a>
+                </div>
+                <div class="copy">© 2014  جميع الحقوق محفوظة. <span>جمعية الأورمان - بوابتك للخير</span> </div>
+            </div>
+        </div>
+
+      
+    </footer>
+
+    <!-- Libs -->
+  <script>
+      (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+              (i[r].q = i[r].q || []).push(arguments)
+          }, i[r].l = 1 * new Date(); a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-54552126-1', 'auto');
+      ga('send', 'pageview');
+
+</script>
+    <script src="/js/libs/jquery.flexslider-min.js"></script>
+    
+    <!-- Custom -->
+    <script src="/js/scripts.js"></script>
+      <script>
+          InitBlog();
+    </script>
+       
+    </form>
+</body>
+</html>

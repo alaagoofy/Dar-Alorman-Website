@@ -1,0 +1,5 @@
+C:\Users\TAGHREED\Documents\Visual Studio 2012\Projects\test\DAL\bin\Debug\DAL.dll
+C:\Users\TAGHREED\Documents\Visual Studio 2012\Projects\test\DAL\bin\Debug\DAL.pdb
+C:\Users\TAGHREED\Documents\Visual Studio 2012\Projects\test\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\TAGHREED\Documents\Visual Studio 2012\Projects\test\DAL\obj\Debug\DAL.dll
+C:\Users\TAGHREED\Documents\Visual Studio 2012\Projects\test\DAL\obj\Debug\DAL.pdb
